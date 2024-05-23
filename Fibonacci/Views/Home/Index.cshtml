@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Index.css" />
+    <title>Fibonacci</title>
+</head>
+<body>
+    <h1><strong>Fibonacci</strong></h1>
+    <p class="description">Enter a number and click on generate to create your Fibonacci.</p>
+    <form id="fibonacciForm">
+        <input id="firstNumber" type="text" placeholder="2">
+        <br>
+        <input id="secondNumber" type="text" placeholder="5">
+        <br>
+        <input type="submit" value="Generate" id="generateButton">
+    </form>
+    <div id="fibonacciList"></div>
+    <button id="tryOtherButton" style="display:none;" onclick="window.location.reload();">Try Other</button>
+    <script>
+        document.getElementById("fibonacciForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var firstNumber = parseInt(document.getElementById("firstNumber").value);
+            var secondNumber = parseInt(document.getElementById("secondNumber").value);
+            var fibonacciList = document.getElementById("fibonacciList");
+
+            fibonacciList.innerHTML = "";
+
+            var fib = [firstNumber, secondNumber];
+            while (fib.length < 10) {
+                var nextFib = fib[fib.length - 1] + fib[fib.length - 2];
+                fib.push(nextFib);
+            }
+
+            var ul = document.createElement("ul");
+            fib.forEach(function (number) {
+                var li = document.createElement("li");
+                li.textContent = number;
+                ul.appendChild(li);
+            });
+            fibonacciList.appendChild(ul);
+
+            document.getElementById("fibonacciForm").style.display = "none";
+            document.getElementById("tryOtherButton").style.display = "block";
+        });
+    </script>
+</body>
+</html>
